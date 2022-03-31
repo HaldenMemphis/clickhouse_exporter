@@ -2,3 +2,6 @@
 .build/
 clickhouse_exporter
 coverage.txt
+.vscode/
+__debug_bin
+.DS_Store

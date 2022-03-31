@@ -40,7 +40,7 @@ func NewExporter(uri url.URL, insecure bool, user, password string) *Exporter {
 	q := uri.Query()
 
 	customizeURI := uri
-	q.Set("query", "select table, sum(data_compressed_bytes) as data_compressed_bytes, sum(bytes) as size, sum(data_uncompressed_bytes) as data_uncompressed_bytes,round((data_compressed_bytes / data_uncompressed_bytes) * 100,2) as compress_rate from system.parts where active and database = 'ods' and table in('ChannelDiagnoseInfoEvent_s120','ChannelDiagnoseInfoEvent_channelInfos_s120','device_heartbeat_record',  'device_service_record', 'device_up_down', 'WifiStatusEvent_s120', 'gatewayDiagnoseInfoEvent_s120', 'speedTestDiagRsp_s120','WifiStatusEvent_s120', 'WifiStatusEvent_wifiStatusList_s120') group by table")
+	q.Set("query", "select table,  sum(rows) as rows,sum(data_compressed_bytes) as data_compressed_bytes, sum(data_uncompressed_bytes) as data_uncompressed_bytes,round((data_compressed_bytes / data_uncompressed_bytes) * 100,2) as compress_rate from system.parts where active and database = 'ods' and table in('ChannelDiagnoseInfoEvent_s120','ChannelDiagnoseInfoEvent_channelInfos_s120','device_heartbeat_record',  'device_service_record', 'device_up_down', 'WifiStatusEvent_s120', 'gatewayDiagnoseInfoEvent_s120', 'speedTestDiagRsp_s120','WifiStatusEvent_s120', 'WifiStatusEvent_wifiStatusList_s120') group by table")
 	customizeURI.RawQuery = q.Encode()
 
 	metricsURI := uri
@@ -273,8 +273,8 @@ type lineResult struct {
 type customizeResult struct {
 	key             string
 	rows            float64
-	originalSize    float64
 	compressedSize  float64
+	originalSize    float64
 	compressionRate float64
 }
 

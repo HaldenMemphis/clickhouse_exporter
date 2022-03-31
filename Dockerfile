@@ -1,6 +1,6 @@
 FROM golang:1.16 AS BUILD
 
-LABEL maintainer="Roman Tkalenko"
+LABEL maintainer="yfliu"
 
 COPY . /go/src/github.com/ClickHouse/clickhouse_exporter
 
