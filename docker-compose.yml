@@ -2,10 +2,10 @@
 version: '3'
 services:
   clickhouse-exporter:
-    image: 34ce31317ce4
+    image: dockerlocal.fh-njrd.top/cilckhouse-exporter:0.0.1
     restart: always
     network_mode: host
-    container_name: clickhouse-exporter-test
+    container_name: clickhouse-exporter
     ports:
       - 9116:9116
     environment:
@@ -13,5 +13,5 @@ services:
       - CLICKHOUSE_USER=default
       - CLICKHOUSE_PASSWORD=123456
             ####此处为命令行启动docker时添加的参数，即和docker run xxxx -scrape_url=//xxx.xxx.xxx.xxx:xxxx等价
-    ###写CK的host:port
+    ###写CK的host:port 本机启动
     command: -scrape_uri=http://pretest05.ovt.iot.fh-njrd.top:8123
